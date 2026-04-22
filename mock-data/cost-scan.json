@@ -1,0 +1,157 @@
+{
+  "scanId": "dashboard-cost-20260401",
+  "scanTimestamp": "2026-04-01T08:00:00Z",
+  "totalCurrentSpend": 18420,
+  "totalEstimatedSavings": 7350,
+  "endpoints": [
+    {
+      "endpointName": "fraud-detection-prod",
+      "instanceType": "ml.m5.4xlarge",
+      "instanceCount": 2,
+      "utilizationPct": 8.3,
+      "idleHours": 612,
+      "monthlyCost": 4320,
+      "recommendation": "RIGHT_SIZE",
+      "recommendedInstanceType": "ml.m5.xlarge",
+      "estimatedSavings": 3240,
+      "region": "us-east-1",
+      "lastInvoked": "2026-03-31T14:22:00Z"
+    },
+    {
+      "endpointName": "risk-scoring-staging",
+      "instanceType": "ml.m5.2xlarge",
+      "instanceCount": 1,
+      "utilizationPct": 4.1,
+      "idleHours": 720,
+      "monthlyCost": 1120,
+      "recommendation": "DELETE",
+      "estimatedSavings": 1120,
+      "region": "us-east-1",
+      "lastInvoked": "2026-02-15T09:00:00Z"
+    },
+    {
+      "endpointName": "churn-prediction-prod",
+      "instanceType": "ml.c5.xlarge",
+      "instanceCount": 1,
+      "utilizationPct": 67.4,
+      "idleHours": 0,
+      "monthlyCost": 620,
+      "recommendation": "OK",
+      "estimatedSavings": 0,
+      "region": "us-east-1",
+      "lastInvoked": "2026-04-01T07:58:00Z"
+    },
+    {
+      "endpointName": "document-classifier-dev",
+      "instanceType": "ml.g4dn.xlarge",
+      "instanceCount": 1,
+      "utilizationPct": 12.7,
+      "idleHours": 480,
+      "monthlyCost": 1830,
+      "recommendation": "SCALE_DOWN",
+      "recommendedInstanceType": "ml.t3.medium",
+      "estimatedSavings": 980,
+      "region": "us-east-1",
+      "lastInvoked": "2026-03-20T11:00:00Z"
+    },
+    {
+      "endpointName": "llm-summarizer-prod",
+      "instanceType": "ml.g4dn.2xlarge",
+      "instanceCount": 1,
+      "utilizationPct": 54.2,
+      "idleHours": 0,
+      "monthlyCost": 2180,
+      "recommendation": "OK",
+      "estimatedSavings": 0,
+      "region": "us-east-1",
+      "lastInvoked": "2026-04-01T07:55:00Z"
+    }
+  ],
+  "trainingJobs": [
+    {
+      "jobName": "fraud-model-retrain-20260328",
+      "instanceType": "ml.p3.2xlarge",
+      "instanceCount": 1,
+      "durationHours": 6.4,
+      "cost": 195.84,
+      "spotEligible": true,
+      "estimatedSpotSavings": 127.30,
+      "status": "Completed",
+      "createdAt": "2026-03-28T02:00:00Z"
+    },
+    {
+      "jobName": "churn-hyperparameter-tuning-20260325",
+      "instanceType": "ml.g4dn.xlarge",
+      "instanceCount": 4,
+      "durationHours": 3.2,
+      "cost": 68.10,
+      "spotEligible": true,
+      "estimatedSpotSavings": 44.27,
+      "status": "Completed",
+      "createdAt": "2026-03-25T14:00:00Z"
+    },
+    {
+      "jobName": "document-classifier-train-20260320",
+      "instanceType": "ml.p3.2xlarge",
+      "instanceCount": 2,
+      "durationHours": 11.8,
+      "cost": 721.68,
+      "spotEligible": false,
+      "estimatedSpotSavings": 0,
+      "status": "Completed",
+      "createdAt": "2026-03-20T08:00:00Z"
+    }
+  ],
+  "notebooks": [
+    {
+      "instanceName": "research-notebook-jp",
+      "instanceType": "ml.m5.xlarge",
+      "idleHours": 312,
+      "monthlyCost": 280,
+      "estimatedSavings": 121,
+      "region": "us-east-1"
+    },
+    {
+      "instanceName": "data-exploration-staging",
+      "instanceType": "ml.t3.medium",
+      "idleHours": 680,
+      "monthlyCost": 45,
+      "estimatedSavings": 42,
+      "region": "us-east-1"
+    }
+  ],
+  "storage": {
+    "unusedModelArtifactsGB": 1240,
+    "storageCostMonthly": 28.52,
+    "estimatedSavings": 185
+  },
+  "storageFindings": [
+    {
+      "bucketName": "sagemaker-models-prod",
+      "coldObjectCount": 147,
+      "monthlyCost": 42,
+      "estimatedSavings": 38,
+      "recommendation": "OPTIMIZE",
+      "hasLifecyclePolicy": false,
+      "region": "us-east-1"
+    },
+    {
+      "bucketName": "sagemaker-training-artifacts",
+      "coldObjectCount": 89,
+      "monthlyCost": 18,
+      "estimatedSavings": 14,
+      "recommendation": "OPTIMIZE",
+      "hasLifecyclePolicy": true,
+      "region": "us-east-1"
+    },
+    {
+      "bucketName": "sagemaker-models-prod/fraud-detection",
+      "coldObjectCount": 23,
+      "monthlyCost": 12,
+      "estimatedSavings": 10,
+      "recommendation": "OPTIMIZE",
+      "hasLifecyclePolicy": false,
+      "region": "us-east-1"
+    }
+  ]
+}

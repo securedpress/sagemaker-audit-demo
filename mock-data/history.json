@@ -1,0 +1,17 @@
+{
+  "clientId": "dashboard",
+  "cost": [
+    { "scanId": "dashboard-cost-20260401", "scanTimestamp": "2026-04-01T08:00:00Z", "type": "cost", "totalCurrentSpend": 18420, "totalEstimatedSavings": 7350, "spendDelta": -1240, "savingsDelta": 320 },
+    { "scanId": "dashboard-cost-20260301", "scanTimestamp": "2026-03-01T08:00:00Z", "type": "cost", "totalCurrentSpend": 19660, "totalEstimatedSavings": 7030, "spendDelta": 880, "savingsDelta": -110 },
+    { "scanId": "dashboard-cost-20260201", "scanTimestamp": "2026-02-01T08:00:00Z", "type": "cost", "totalCurrentSpend": 18780, "totalEstimatedSavings": 7140, "spendDelta": -560, "savingsDelta": 420 },
+    { "scanId": "dashboard-cost-20260101", "scanTimestamp": "2026-01-01T08:00:00Z", "type": "cost", "totalCurrentSpend": 19340, "totalEstimatedSavings": 6720, "spendDelta": 1100, "savingsDelta": -80 },
+    { "scanId": "dashboard-cost-20251201", "scanTimestamp": "2025-12-01T08:00:00Z", "type": "cost", "totalCurrentSpend": 18240, "totalEstimatedSavings": 6800 }
+  ],
+  "security": [
+    { "scanId": "dashboard-security-20260401", "scanTimestamp": "2026-04-01T08:00:00Z", "type": "security", "riskScore": 72, "totalFindings": 12, "riskDelta": -8, "findingsDelta": -3 },
+    { "scanId": "dashboard-security-20260301", "scanTimestamp": "2026-03-01T08:00:00Z", "type": "security", "riskScore": 80, "totalFindings": 15, "riskDelta": -4, "findingsDelta": -2 },
+    { "scanId": "dashboard-security-20260201", "scanTimestamp": "2026-02-01T08:00:00Z", "type": "security", "riskScore": 84, "totalFindings": 17, "riskDelta": 6, "findingsDelta": 3 },
+    { "scanId": "dashboard-security-20260101", "scanTimestamp": "2026-01-01T08:00:00Z", "type": "security", "riskScore": 78, "totalFindings": 14, "riskDelta": -7, "findingsDelta": -4 },
+    { "scanId": "dashboard-security-20251201", "scanTimestamp": "2025-12-01T08:00:00Z", "type": "security", "riskScore": 85, "totalFindings": 18 }
+  ]
+}

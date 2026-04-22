@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Dark theme (default) ──────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --navy:           #0A1128;
+  --navy-light:     #1C2541;
+  --accent:         #2A9D8F;
+  --accent-light:   #CDEDEA;
+  --gold:           #F4A261;
+  --danger:         #bf1922;
+  --danger-light:   #F4B8BC;
+  --text-primary:   #FFFFFF;
+  --text-muted:     #6C757D;
+  --card-border:    #1e3a5f;
+  --grid-line:      #1C2541;
+  /* Header — same as body in dark mode */
+  --header-bg:      #1C2541;
+  --header-border:  #2A9D8F;
+  --header-text:    #FFFFFF;
+  --header-muted:   #CDEDEA;
+  --header-badge-bg: #2A9D8F;
+  --header-badge-text: #0A1128;
+  color-scheme: dark;
+}
+
+/* ── Light theme ───────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --navy:           #F8F9FA;
+  --navy-light:     #FFFFFF;
+  --accent:         #2A9D8F;
+  --accent-light:   #CDEDEA;
+  --gold:           #E07B3A;
+  --danger:         #bf1922;
+  --danger-light:   #F4B8BC;
+  --text-primary:   #0A1128;
+  --text-muted:     #6C757D;
+  --card-border:    #DEE2E6;
+  --grid-line:      #F0F0F0;
+  /* Header — stays dark in light mode for contrast */
+  --header-bg:      #0A1128;
+  --header-border:  #2A9D8F;
+  --header-text:    #FFFFFF;
+  --header-muted:   #CDEDEA;
+  --header-badge-bg: #2A9D8F;
+  --header-badge-text: #0A1128;
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--navy);
+  transition: background-color 0.2s ease;
+}
+
+[data-theme="dark"] body,
+:root body {
+  background-image:
+    linear-gradient(rgba(42, 157, 143, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 157, 143, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+[data-theme="light"] body {
+  background-image:
+    linear-gradient(rgba(42, 157, 143, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 157, 143, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Screen-only elements (hidden in print) ───────────────────────────────── */
+.screen-only { display: block; }
+.print-security-report { display: none; }
+
+/* ── Spotlight bar desktop dividers ───────────────────────────────────────── */
+@media (min-width: 640px) {
+  .spotlight-col {
+    border-bottom: none !important;
+    border-right: 1px solid rgba(244,162,97,0.25);
+  }
+  .spotlight-col:last-child {
+    border-right: none;
+  }
+}
+
+/* ── Print / PDF styles ────────────────────────────────────────────────────── */
+/*
+ * TODO v1.4 — Replace window.print() with server-side PDF generation
+ * Current approach: browser print via window.print() — works for small clients,
+ * breaks with large findings tables (50+ rows), inconsistent across browsers,
+ * and gives no control over output format.
+ *
+ * Planned replacement:
+ *   - New API route: /api/export/[clientId]
+ *   - Use puppeteer or @react-pdf/renderer for server-side rendering
+ *   - Dedicated print layout component (not the dashboard UI)
+ *   - Returns a real .pdf file download with consistent pagination
+ *   - Reusable for v1.5 email digest attachments
+ *
+ * Known limitations until then:
+ *   - Large tables (50+ rows) may split mid-row
+ *   - Charts may not render in Safari/Firefox print preview
+ *   - Client can accidentally print with wrong settings via browser dialog
+ */
+@media print {
+  :root {
+    --navy:         #FFFFFF;
+    --navy-light:   #F8F9FA;
+    --text-primary: #0A1128;
+    --text-muted:   #6C757D;
+    --card-border:  #DEE2E6;
+    --accent:       #2A9D8F;
+    --gold:         #C07030;
+    --danger:       #bf1922;
+  }
+
+  /* Force light theme in print regardless of active theme —
+     [data-theme="dark"] has higher specificity than :root so must be
+     explicitly overridden here or dark backgrounds/invisible text wins */
+  :root,
+  [data-theme="dark"],
+  [data-theme="light"] {
+    --navy:           #FFFFFF !important;
+    --navy-light:     #F8F9FA !important;
+    --header-bg:      #0A1128 !important;
+    --header-text:    #FFFFFF !important;
+    --header-muted:   #CDEDEA !important;
+    --text-primary:   #0A1128 !important;
+    --text-muted:     #495057 !important;
+    --card-border:    #DEE2E6 !important;
+    --grid-line:      #F0F0F0 !important;
+    --accent:         #2A9D8F !important;
+    --gold:           #C07030 !important;
+    --danger:         #bf1922 !important;
+  }
+
+  html, body {
+    background: white !important;
+    background-image: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Show print report, hide screen UI */
+  .print-security-report { display: block !important; }
+  .screen-only { display: none !important; }
+
+  /* Hide interactive / nav elements */
+  .print\:hidden,
+  header button,
+  footer,
+  [role="tablist"],
+  [data-theme-toggle] {
+    display: none !important;
+  }
+
+  /* Main content — no padding waste */
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Cards — keep together, light border, no shadow */
+  .rounded-xl {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    border: 1px solid #DEE2E6 !important;
+    box-shadow: none !important;
+    background-color: #F8F9FA !important;
+  }
+
+  /* Charts — never split across pages, fixed print height */
+  .recharts-wrapper,
+  .recharts-responsive-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    /* Constrain chart height so it fits on one page without overflow */
+    max-height: 180px !important;
+    height: 180px !important;
+    overflow: hidden !important;
+  }
+
+  /* Shrink recharts SVG to match */
+  .recharts-wrapper svg {
+    height: 180px !important;
+    max-height: 180px !important;
+  }
+
+  /* Tables — scale down for print to prevent column cutoff */
+  table {
+    width: 100% !important;
+    table-layout: fixed !important;
+    font-size: 9px !important;
+  }
+
+  th, td {
+    padding: 4px 6px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    word-break: break-word !important;
+  }
+
+  /* Ensure Est. Savings and Action columns are not hidden */
+  th:last-child, td:last-child,
+  th:nth-last-child(2), td:nth-last-child(2) {
+    display: table-cell !important;
+  }
+
+  /* Security findings — allow title and description columns to wrap
+     so findings text isn't truncated in print */
+  td:first-child,
+  td:nth-child(2) {
+    white-space: normal !important;
+    word-break: break-word !important;
+    min-width: 120px;
+  }
+
+  /* Tab panels with tables — allow natural page flow */
+  [role="tabpanel"] table {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  [role="tabpanel"] tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Force header to print dark */
+  header {
+    background-color: #0A1128 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Prevent orphaned blank pages from flex/min-height containers */
+  [data-theme] {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Typography */
+  body { font-size: 11px; }
+  h1   { font-size: 18px !important; }
+
+  /* Tab panels — only active panel is in DOM so this is fine */
+  [role="tabpanel"] {
+    display: block !important;
+  }
+
+  @page {
+    margin: 1.5cm 2cm;
+    size: A4;
+  }
+
+  /* Spotlight bar — force 3 columns in print, restore dividers */
+  .spotlight-bar,
+  .spotlight-bar > div {
+    display: block !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .spotlight-bar > div {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .spotlight-col {
+    border-bottom: none !important;
+    border-right: 1px solid rgba(244,162,97,0.3) !important;
+    padding: 8px 12px !important;
+  }
+
+  .spotlight-col:last-child {
+    border-right: none !important;
+  }
+
+  /* Avoid page break after last element creating blank page */
+  main > *:last-child {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+}

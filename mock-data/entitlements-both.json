@@ -1,0 +1,10 @@
+{
+  "clientId": "dashboard",
+  "clientName": "Acme Corp",
+  "accountId": "000000000000",
+  "region": "us-east-1",
+  "modules": ["cost", "security"],
+  "contractStart": "2026-01-01",
+  "contractEnd": "2027-12-31",
+  "contactEmail": "demo@securedpress.com"
+}
